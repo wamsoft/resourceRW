@@ -6,6 +6,8 @@
 #include <string>
 #include <cstdint>
 #include <cctype>
+#include <iterator>
+#include <algorithm>
 
 #if defined(__cplusplus) && (__cplusplus >= 201103L)
 #define METHOD_DELETE = delete
@@ -20,7 +22,10 @@ namespace VersionResource {
 
 using std::size_t;
 using std::u16string;
+#if !(defined(__cplusplus) && (__cplusplus >= 201103L))
+// char16_t is a builtin type since C++11 (MSVC /Zc:__cplusplus + C++17 => C2628)
 typedef std::u16string::value_type char16_t;
+#endif
 
 #if defined(__cplusplus) && (__cplusplus >= 201103L)
 template<class T>
